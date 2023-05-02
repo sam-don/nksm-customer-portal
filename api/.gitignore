@@ -1,0 +1,8 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# FLASK
+/__pycache__
+baby_stats.db
+/venv
+/data
+/instance
