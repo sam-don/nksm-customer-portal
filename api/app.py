@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-import datetime
+import sheets
 from  dateutil.parser import *
 
 app = Flask(__name__)
@@ -14,8 +14,8 @@ db = SQLAlchemy(app)
 class Customers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
+    company = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String, nullable=False)
-    phone = db.Column(db.Integer, nullable=False)
     mobile = db.Column(db.Integer, nullable=False)
     address = db.Column(db.String, nullable=False)
     # dob = db.Column(db.Date, nullable=False)
@@ -27,8 +27,8 @@ class Customers(db.Model):
         return {
             'id': self.id,
             'name': self.name,
+            'company': self.company,
             'email': self.email,
-            'phone': self.phone,
             'mobile': self.mobile,
             'address': self.address
             # 'dob': self.dob.strftime('%d/%m'),
@@ -48,12 +48,15 @@ def create_customer():
     name = request.json['name']
     # dob = datetime.datetime.strptime(request.json['dob'], '%Y-%m-%dT%H:%M')
     email = request.json['email']
-    phone = request.json['phone']
+    company = request.json['company']
     mobile = request.json['mobile']
     address = request.json['address']
-    customer = Customers(name=name, email=email, phone=phone, mobile=mobile, address=address)
+    customer = Customers(name=name, company=company, email=email, mobile=mobile, address=address)
     db.session.add(customer)
     db.session.commit()
+
+    creds = sheets.authenticate()
+    sheets.append_to_sheet(creds, name, company, email, mobile, address)
     return jsonify(customer.serialize()), 201
 
 with app.app_context():

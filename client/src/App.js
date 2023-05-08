@@ -5,8 +5,8 @@ import './App.css';
 function App() {
   const [customers, setCustomers] = useState([]);
   const [name, setName] = useState('');
+  const [company, setCompany] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
   const [mobile, setMobile] = useState('');
   const [address, setAddress] = useState('');
 
@@ -28,8 +28,8 @@ function App() {
     // const day = dobdate[2]
     const newCustomer = {
       name: name,
+      company: company,
       email: email,
-      phone: phone,
       mobile: mobile,
       address: address
     };
@@ -46,8 +46,8 @@ function App() {
         console.log(data);
         setCustomers([...customers, data]);
         setName('');
+        setCompany('');
         setEmail('');
-        setPhone('');
         setMobile('');
         setAddress('');
       })
@@ -77,8 +77,8 @@ function App() {
 
       <form id="customer-form" onSubmit={handleSubmit}>
           <input type="text" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)} required />
+          <input type="text" placeholder="Company" value={company} onChange={(event) => setCompany(event.target.value)} />
           <input type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} required />
-          <input type="text" placeholder="Phone" value={phone} onChange={(event) => setPhone(event.target.value)} />
           <input type="text" placeholder="Mobile" value={mobile} onChange={(event) => setMobile(event.target.value)} required />
           <input type="text" placeholder="Address" value={address} onChange={(event) => setAddress(event.target.value)} />
         <div className="buttons">
