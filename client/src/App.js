@@ -76,10 +76,10 @@ function App() {
       </div>
 
       <form id="customer-form" onSubmit={handleSubmit}>
-          <input type="text" placeholder="Name" value={name} onChange={(event) => setName(event.target.value)} required />
+          <input type="text" placeholder="Name (required)" value={name} onChange={(event) => setName(event.target.value)} required />
+          <input type="text" placeholder="Mobile (required)" value={mobile} onChange={(event) => setMobile(event.target.value)} required />
           <input type="text" placeholder="Company" value={company} onChange={(event) => setCompany(event.target.value)} />
-          <input type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} required />
-          <input type="text" placeholder="Mobile" value={mobile} onChange={(event) => setMobile(event.target.value)} required />
+          <input type="text" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
           <input type="text" placeholder="Address" value={address} onChange={(event) => setAddress(event.target.value)} />
         <div className="buttons">
           {/* <button className="button-67" onClick={handleShowGuesses}>Show Guesses</button> */}
