@@ -34,4 +34,4 @@ SQLAlchemy==2.0.7
 typing_extensions==4.5.0
 uritemplate==4.1.1
 urllib3==2.0.2
-Werkzeug==2.2.3
+Werkzeug>=2.3.3
